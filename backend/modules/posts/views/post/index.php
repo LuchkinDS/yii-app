@@ -63,7 +63,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         if($model->deleted_at !== 0) { // если пост удален, позволяем востановить
                             return Html::a('<span class="glyphicon glyphicon-arrow-up"></span>', $url, [
                                 'title' => Yii::t('yii', 'Delete'),
-                                'data-confirm' => Yii::t('yii', 'Are you sure to delete this item?'),
+                                'data-confirm' => Yii::t('yii', 'Are you sure to restore this item?'),
                                 'data-method' => 'post',
                             ]);
                         }

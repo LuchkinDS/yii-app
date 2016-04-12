@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+namespace common\models;
 
 use Yii;
 use yii\db\ActiveRecord;
@@ -121,13 +121,12 @@ class Posts extends \yii\db\ActiveRecord
         return $this->update(false, ['deleted_at']);
     }
     
-    public static function notDelete($query)
+    /**
+     * @inheritdoc
+     * @return PostsQuery the active query used by this AR class.
+     */
+    public static function find()
     {
-        $query->andWhere(['deleted_at' => 0]);
-    }
-    
-    public static function isActive($query)
-    {
-        $query->andWhere(['active' => true]);
+        return new PostsQuery(get_called_class());
     }
 }

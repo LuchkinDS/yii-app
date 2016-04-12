@@ -3,8 +3,8 @@
 namespace app\modules\posts\controllers;
 
 use Yii;
-use app\models\Posts;
-use app\models\PostsSearch;
+use common\models\Posts;
+use common\models\PostsSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -89,7 +89,7 @@ class PostController extends Controller
     {
         $model = new Posts();
 
-        if ($model->load(Yii::$app->request->post() && $model->save())) {
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         }
         return $this->render('create', [
