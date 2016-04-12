@@ -24,6 +24,8 @@ use common\models\User;
  */
 class Posts extends \yii\db\ActiveRecord
 {
+    const EVENT_POST_PUBLISHED = 'pubishedPost';
+    
     /**
      * @inheritdoc
      */
@@ -43,6 +45,7 @@ class Posts extends \yii\db\ActiveRecord
             [['visible'], 'filter', 'filter' => function($value) {
                 return (int)$value;
             }],
+            [['deleted_at'], 'default', 'value' => 0],
             [['text'], 'string'],
             [['title'], 'string', 'max' => 255],
             [['id_user'], 'exist', 'skipOnError' => true, 'targetClass' => User::className(), 'targetAttribute' => ['id_user' => 'id']],
@@ -102,6 +105,13 @@ class Posts extends \yii\db\ActiveRecord
         return false;
     }
     
+    public function afterSave($insert, $changedAttributes) {
+        parent::afterSave($insert, $changedAttributes);
+        if ($this->visible === 1 && $this->deleted_at === 0) {
+            $this->trigger(self::EVENT_POST_PUBLISHED);
+        }
+    }
+
     public function softDelete()
     {
         if (!$this->hasAttribute('deleted_at') && !$this->hasProperty('deleted_at')) {

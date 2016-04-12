@@ -19,7 +19,7 @@ class PostController extends Controller
         $dataProvider = new \yii\data\ActiveDataProvider([
             'query' => Posts::find()->notDelete()->isVisible()->orderBy('updated_at DESC'),
             'pagination' => [
-                'pageSize' => 3,
+                // 'pageSize' => 3,
             ],
         ]);
         

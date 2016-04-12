@@ -10,7 +10,7 @@ use dosamigos\ckeditor\CKEditor;
 ?>
 
 <div class="posts-form">
-
+    
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
@@ -27,5 +27,5 @@ use dosamigos\ckeditor\CKEditor;
     </div>
 
     <?php ActiveForm::end(); ?>
-
+       
 </div>

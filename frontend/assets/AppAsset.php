@@ -21,6 +21,10 @@ class AppAsset extends AssetBundle
         'css/site.css',
     ];
     public $js = [
+        '//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js',
+        '//cdn.socket.io/socket.io-1.3.5.js',
+        '//cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js',
+        'js/app.js',
     ];
     public $depends = [
         'yii\web\YiiAsset',
