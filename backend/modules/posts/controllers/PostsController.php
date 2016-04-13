@@ -11,9 +11,9 @@ use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
 
 /**
- * PostController implements the CRUD actions for Posts model.
+ * PostsController implements the CRUD actions for Posts model.
  */
-class PostController extends Controller
+class PostsController extends Controller
 {
     /**
      * @inheritdoc
@@ -25,12 +25,7 @@ class PostController extends Controller
                 'class' => AccessControl::className(),
                 'rules' => [
                     [
-                        'actions' => ['login', 'error'],
-                        'allow' => true,
-                    ],
-                    [
                         'actions' => [
-                            'logout', 
                             'index', 
                             'create', 
                             'update', 
@@ -39,7 +34,7 @@ class PostController extends Controller
                             'restore'
                         ],
                         'allow' => true,
-                        'roles' => ['@'],
+                        'roles' => ['admin'],
                     ],
                 ],
             ],

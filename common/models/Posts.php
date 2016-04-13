@@ -77,6 +77,11 @@ class Posts extends \yii\db\ActiveRecord
         return $this->hasOne(User::className(), ['id' => 'id_user']);
     }
     
+    public function getUsername()
+    {
+        return $this->user->username;
+    }
+
     public function behaviors() 
     { 
         return [ 

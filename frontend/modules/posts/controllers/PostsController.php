@@ -6,9 +6,9 @@ use yii\web\Controller;
 use common\models\Posts;
 
 /**
- * Default controller for the `posts` module
+ * Posts controller for the `posts` module
  */
-class PostController extends Controller
+class PostsController extends Controller
 {
     /**
      * Renders the index view for the module
@@ -19,7 +19,7 @@ class PostController extends Controller
         $dataProvider = new \yii\data\ActiveDataProvider([
             'query' => Posts::find()->notDelete()->isVisible()->orderBy('updated_at DESC'),
             'pagination' => [
-                // 'pageSize' => 3,
+                'pageSize' => 5,
             ],
         ]);
         

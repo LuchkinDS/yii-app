@@ -23,7 +23,7 @@ use yii\widgets\ListView;
     ],
 ]); ?>
 
-<script id="entry-template" type="text/x-handlebars-template">
+<script id="posts-item-template" type="text/x-handlebars-template">
 <div class="posts-item">
     <div class="panel panel-default">
         <div class="panel-heading">{{title}}</div>

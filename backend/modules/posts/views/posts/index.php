@@ -26,12 +26,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
             // 'id',
             // 'id_user',
-            [
-                'attribute' => 'username',
-                'value' => function ($model) {
-                    return $model->user->username;
-                },
-            ],    
+            'username',    
             'title',
             // 'text:ntext',
             'created_at:date',

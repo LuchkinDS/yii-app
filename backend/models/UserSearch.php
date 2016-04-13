@@ -1,27 +1,27 @@
 <?php
 
-namespace common\models;
+namespace app\models;
 
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use common\models\Posts;
+use app\models\User;
 
 /**
- * PostsSearch represents the model behind the search form about `app\models\Posts`.
+ * UserSearch represents the model behind the search form about `common\models\User`.
  */
-class PostsSearch extends Posts
+class UserSearch extends User
 {
-    public $username;
-
+    public $role;
+    
     /**
      * @inheritdoc
      */
     public function rules()
     {
         return [
-            [['id', 'id_user', 'created_at', 'updated_at', 'deleted_at', 'visible'], 'integer'],
-            [['title', 'text', 'username'], 'safe'],
+            [['id', 'status', 'created_at', 'updated_at'], 'integer'],
+            [['username', 'auth_key', 'password_hash', 'password_reset_token', 'email', 'role'], 'safe'],
         ];
     }
 
@@ -43,7 +43,7 @@ class PostsSearch extends Posts
      */
     public function search($params)
     {
-        $query = Posts::find()->with(['user']);
+        $query = User::find()->with(['authAssignment']);
 
         // add conditions that should always apply here
 
@@ -53,13 +53,14 @@ class PostsSearch extends Posts
 
         $dataProvider->setSort([
             'attributes' => [
-                'title',
+                'username',
+                'email',
+                'status',
                 'created_at',
-                'visible',
-                'username' => [
-                    'asc' => ['user.username' => SORT_ASC],
-                    'desc' => ['user.username' => SORT_DESC],
-                    'label' => 'Username'
+                'role' => [
+                    'asc' => ['auth_assignment.item_name' => SORT_ASC],
+                    'desc' => ['auth_assignment.item_name' => SORT_DESC],
+                    'label' => 'Role'
                 ]
             ]
         ]);
@@ -75,20 +76,21 @@ class PostsSearch extends Posts
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'id_user' => $this->id_user,
+            'status' => $this->status,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'deleted_at' => $this->deleted_at,
-            'visible' => $this->visible,
         ]);
 
-        $query->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'text', $this->text]);
+        $query->andFilterWhere(['like', 'username', $this->username])
+            ->andFilterWhere(['like', 'auth_key', $this->auth_key])
+            ->andFilterWhere(['like', 'password_hash', $this->password_hash])
+            ->andFilterWhere(['like', 'password_reset_token', $this->password_reset_token])
+            ->andFilterWhere(['like', 'email', $this->email]);
         
-        $query->joinWith(['user' => function ($q) {
-            $q->where("user.username LIKE '%{$this->username}%'");
+        $query->joinWith(['authAssignment' => function ($q) {
+            $q->where("auth_assignment.item_name LIKE '%{$this->role}%'");
         }]);
-        
+
         return $dataProvider;
     }
 }
