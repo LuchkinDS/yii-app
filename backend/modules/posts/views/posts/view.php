@@ -41,14 +41,20 @@ $this->params['breadcrumbs'][] = $this->title;
             // 'id',
             // 'id_user',
             [
-               'attribute' => 'username',
+                'attribute' => 'username',
                 'value' => $model->user->username,
             ],
             'title',
             'text:html',
             'created_at:date',
             // 'updated_at',
-            'deleted_at:date',
+            [
+                'attribute' => 'deleted_at',
+                'value' => $model->deleted_at === 0 ? 
+                    Yii::$app->formatter->asBoolean($model->deleted_at) : 
+                    Yii::$app->formatter->asDate($model->deleted_at),
+            ],
+            // 'deleted_at:date',
             'visible:boolean',
         ],
     ]) ?>
