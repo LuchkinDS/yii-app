@@ -11,6 +11,11 @@ return [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'controllerNamespace' => 'frontend\controllers',
+    'modules' => [
+        'posts' => [
+            'class' => 'app\modules\posts\Module',
+        ],
+    ],
     'components' => [
         'user' => [
             'identityClass' => 'common\models\User',
@@ -28,14 +33,19 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
         'urlManager' => [
+            'class' => 'yii\web\UrlManager',
             'enablePrettyUrl' => true,
+            'enableStrictParsing' => true,
             'showScriptName' => false,
             'rules' => [
+                '' => 'site/index',
+                '<_m:(posts)>' => '<_m>/post/index',
+                '<_c:\w+>' => '<_c>/index',
+                '<_c:\w+>/<_a:\w+>' => '<_c>/<_a>',
+                '<_c:\w+>/<_a:\w+>/<id:\d+>' => '<_c>/<_a>',
             ],
         ],
-        */
     ],
     'params' => $params,
 ];

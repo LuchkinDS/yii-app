@@ -10,8 +10,15 @@ return [
     'id' => 'app-backend',
     'basePath' => dirname(__DIR__),
     'controllerNamespace' => 'backend\controllers',
-    'bootstrap' => ['log'],
-    'modules' => [],
+    'bootstrap' => ['log', 'app\components\PostPublisher'],
+    'modules' => [
+        'posts' => [
+            'class' => 'app\modules\posts\Module',
+        ],
+        'users' => [
+            'class' => 'app\modules\users\Module',
+        ],
+    ],
     'components' => [
         'user' => [
             'identityClass' => 'common\models\User',
@@ -29,14 +36,31 @@ return [
         'errorHandler' => [
             'errorAction' => 'site/error',
         ],
-        /*
+        'elephantio' => [
+            'class' => 'sammaye\elephantio\ElephantIo',
+            'host' => 'http://localhost:3000'
+        ],
         'urlManager' => [
+            'class' => 'yii\web\UrlManager',
             'enablePrettyUrl' => true,
+            'enableStrictParsing' => true,
             'showScriptName' => false,
             'rules' => [
+                '' => 'site/index',
+                /* posts */
+                '<_m:(posts)>' => '<_m>/post/index',
+                '<_m:(posts)>/<_a:(index|create)>' => '<_m>/post/<_a>',
+                '<_m:(posts)>/<_a:(update|view|delete|restore)>/<id:\d+>' => '<_m>/post/<_a>',
+                /* users */
+                '<_m:(users)>' => '<_m>/user/index',
+                '<_m:(users)>/<_a:(index|create)>' => '<_m>/user/<_a>',
+                '<_m:(users)>/<_a:(update|view|delete|restore)>/<id:\d+>' => '<_m>/user/<_a>',
+                /* --- */
+                '<_c:\w+>' => '<_c>/index',
+                '<_c:\w+>/<_a:\w+>' => '<_c>/<_a>',
+                '<_c:\w+>/<_a:\w+>/<id:\d+>' => '<_c>/<_a>',
             ],
         ],
-        */
     ],
     'params' => $params,
 ];

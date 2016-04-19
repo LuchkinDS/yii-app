@@ -16,3 +16,31 @@
 - Стили и JS для списка новостей на фронтенде загружать при помощи AssetBundle
 - WYSIWYG должен быть установлен через composer 
 - код вести в репозитории git, функционал желательно опубликовать в публичном репозитории на github
+
+---- app init
+
+composer update
+yii migrate
+yii migrate --migrationPath=@yii/rbac/migrations
+yii rbac/init
+
+---- publisher server - index.js
+
+var http = require('http').Server();
+var io = require('socket.io')(http);
+var port = 3000;
+
+io.on('connection', function(socket){
+  	console.log('a user connected');
+  	socket.on('disconnect', function(){
+	    console.log('user disconnected');
+	});
+	socket.on('post', function (data) {
+       	console.log(data);
+       	io.emit('post', data);
+    });
+});
+
+http.listen(port, function(){
+  	console.log('listening on *:' + port);
+});
