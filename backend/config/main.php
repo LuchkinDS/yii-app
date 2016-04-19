@@ -48,13 +48,13 @@ return [
             'rules' => [
                 '' => 'site/index',
                 /* posts */
-                '<_m:(posts)>' => '<_m>/post/index',
-                '<_m:(posts)>/<_a:(index|create)>' => '<_m>/post/<_a>',
-                '<_m:(posts)>/<_a:(update|view|delete|restore)>/<id:\d+>' => '<_m>/post/<_a>',
+                '<_m:(posts)>' => '<_m>/posts/index',
+                '<_m:(posts)>/<_a:(index|create)>' => '<_m>/posts/<_a>',
+                '<_m:(posts)>/<_a:(update|view|delete|restore)>/<id:\d+>' => '<_m>/posts/<_a>',
                 /* users */
-                '<_m:(users)>' => '<_m>/user/index',
-                '<_m:(users)>/<_a:(index|create)>' => '<_m>/user/<_a>',
-                '<_m:(users)>/<_a:(update|view|delete|restore)>/<id:\d+>' => '<_m>/user/<_a>',
+                '<_m:(users)>' => '<_m>/users/index',
+                '<_m:(users)>/<_a:(index|create)>' => '<_m>/users/<_a>',
+                '<_m:(users)>/<_a:(update|view|delete|restore)>/<id:\d+>' => '<_m>/users/<_a>',
                 /* --- */
                 '<_c:\w+>' => '<_c>/index',
                 '<_c:\w+>/<_a:\w+>' => '<_c>/<_a>',

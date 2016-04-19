@@ -11,7 +11,15 @@ $this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Posts'), 'url' => ['
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="posts-view">
-
+    
+    <div class="col-lg-12">
+        <?php if(Yii::$app->session->hasFlash('publisher_error')): ?>
+            <div class="alert alert-danger" role="alert">
+                <?= Yii::$app->session->getFlash('publisher_error') ?>
+            </div>
+        <?php endif; ?>
+    </div>
+    
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>

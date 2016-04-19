@@ -40,7 +40,7 @@ return [
             'showScriptName' => false,
             'rules' => [
                 '' => 'site/index',
-                '<_m:(posts)>' => '<_m>/post/index',
+                '<_m:(posts)>' => '<_m>/posts/index',
                 '<_c:\w+>' => '<_c>/index',
                 '<_c:\w+>/<_a:\w+>' => '<_c>/<_a>',
                 '<_c:\w+>/<_a:\w+>/<id:\d+>' => '<_c>/<_a>',

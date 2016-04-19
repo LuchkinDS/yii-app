@@ -86,7 +86,7 @@ class PostsSearch extends Posts
             ->andFilterWhere(['like', 'text', $this->text]);
         
         $query->joinWith(['user' => function ($q) {
-            $q->where("user.username LIKE '%{$this->username}%'");
+            $q->where("{{%user}}.username LIKE '%{$this->username}%'");
         }]);
         
         return $dataProvider;

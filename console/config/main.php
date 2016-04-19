@@ -20,6 +20,17 @@ return [
                 ],
             ],
         ],
+        'db' => [
+            'class' => 'yii\db\Connection',
+            'dsn' => 'mysql:host=localhost;dbname=yii-app',
+            'username' => 'yii-app',
+            'password' => 'yii-app',
+            'charset' => 'utf8',
+            'tablePrefix' => 'app_',
+            'enableSchemaCache' => true,
+            'schemaCacheDuration' => 3600,
+            'schemaCache' => 'cache',
+        ],
     ],
     'params' => $params,
 ];

@@ -88,7 +88,7 @@ class UserSearch extends User
             ->andFilterWhere(['like', 'email', $this->email]);
         
         $query->joinWith(['authAssignment' => function ($q) {
-            $q->where("auth_assignment.item_name LIKE '%{$this->role}%'");
+            $q->where("{{%auth_assignment}}.item_name LIKE '%{$this->role}%'");
         }]);
 
         return $dataProvider;

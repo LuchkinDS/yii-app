@@ -7,6 +7,7 @@ use yii\base\Event;
 use common\models\Posts;
 use yii\helpers\ArrayHelper;
 use Yii;
+use ElephantIO\Exception\ServerConnectionFailureException;
 
 /**
  * Description of PostPublisher
@@ -21,6 +22,10 @@ class PostPublisher implements BootstrapInterface {
     public function postPublished(Event $event)
     {
         $data = ArrayHelper::toArray($event->sender);
-        Yii::$app->elephantio->emit('post', $data);
+        try {
+            Yii::$app->elephantio->emit('post', $data);
+        } catch (ServerConnectionFailureException $exc) {
+            Yii::$app->session->setFlash('publisher_error', Yii::t('app', 'post publisher server not launched'));
+        }
     }
 }
